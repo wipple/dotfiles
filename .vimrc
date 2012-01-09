@@ -129,6 +129,11 @@ let migemodict=$HOME.'.vim/dict/migemo-dict'
 set backupdir=$HOME/backup
 " スワップファイルの保存先
 let &directory = &backupdir
+" Undo履歴ファイルの保存先
+if has('persistent_undo')
+    let &undodir = &backupdir
+    set undofile
+endif
 " 外部の操作（gitなど）による変更を自動更新
 set autoread
 " 編集中に他のファイルを開く
