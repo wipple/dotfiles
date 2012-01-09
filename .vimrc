@@ -402,22 +402,28 @@ let mygrepprg='grep'
 let qfixmemo_fileencoding = 'utf-8'
 let qfixmemo_fileformat = 'unix'
 let qfixmemo_filetype = ''
-" Dropbox連携
-let qfixmemo_dir = '~/Dropbox/qfixmemo'
-let QFixMRU_RootDir = '~/Dropbox/qfixmemo'
-let QFixMRU_Filename = '~/Dropbox/qfixmemo/.qfixmru'
-" Markdown
-let qfixmemo_filename = '%Y/%m/%Y-%m-%d-%H%M%S.mkd'
-let qfixmemo_template = ['%TITLE% ', ""]
-let qfixmemo_title = '#'
+" octopressと連携
+let qfixmemo_dir = '$HOME/src/octopress/source/_posts'
+let QFixMRU_RootDir = '$HOME/src/octopress/source/_posts'
+let QFixMRU_Filename = '$HOME/.qfixmru'
+let qfixmemo_timeformat = 'date: %Y-%m-%d %H:%M'
+let qfixmemo_filename = '%Y-%m-%d-%H%M.mkd'
+let qfixmemo_template =
+            \ ['---', 'layout: post', '%TITLE% ', '%DATE%',
+            \ 'comments: true', 'categories: ', '---']
+let qfixmemo_title = 'title:'
+let qfixmemo_timeformat_regxp = '^date: \d\{4}-\d\{2}-\d\{2} \d\{2}:\d\{2}'
+let qfixmemo_timestamp_regxp = qfixmemo_timeformat_regxp
+let qfixmemo_template_keycmd = "2j$a"
 let QFixMRU_Title = {}
-let QFixMRU_Title['mkd'] = '^#'
+let QFixMRU_Title['mkd'] = '^title:'
 " 自動整形
 let qfixmemo_use_keyword = 0
-let qfixmemo_use_addtitle = 1
+let qfixmemo_use_addtitle = 0
 let qfixmemo_use_addtime = 0
-let qfixmemo_use_updatetime = 0
+let qfixmemo_use_updatetime = 1
 let qfixmemo_use_deletenulllines = 0
+nnoremap <Leader>b :<C-u>!rake gen_deploy<CR>
 "}}}
 " lightdiff {{{
 NeoBundle 'git@github.com:wipple/lightdiff.git'
@@ -514,8 +520,8 @@ nnoremap <silent> <Leader>p :<C-u>Project<CR>
 NeoBundle 'tyru/caw.vim'
 nmap <Leader>c <Plug>(caw:prefix)
 vmap <Leader>c <Plug>(caw:prefix)
-nmap <Plug>(caw:prefix)<Space> <Plug>(caw:I:toggle)
-vmap <Plug>(caw:prefix)<Space> <Plug>(caw:I:toggle)
+nmap <Plug>(caw:prefix)<Space> <Plug>(caw:i:toggle)
+vmap <Plug>(caw:prefix)<Space> <Plug>(caw:i:toggle)
 "}}}
 " alignta{{{
 NeoBundle 'h1mesuke/vim-alignta'
