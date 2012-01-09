@@ -464,7 +464,7 @@ endif
 NeoBundle 'git@github.com:wipple/neco-look.git'
 " lookコマンドに辞書ファイルの引数を渡せるように勝手に改造
 let g:neocomplcache_source_look_dictionaries = ['/usr/share/dict/*']
-}}}
+"}}}
 " git-vim{{{
 NeoBundle 'motemen/git-vim'
 " デフォルトのキーマップを無効にしていくつか追加
