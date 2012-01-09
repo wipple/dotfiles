@@ -416,6 +416,7 @@ let qfixmemo_use_deletenulllines = 0
 "}}}
 " lightdiff {{{
 NeoBundle 'git@github.com:wipple/lightdiff.git'
+colorscheme lightdiff
 "}}}
 "}}}
 
