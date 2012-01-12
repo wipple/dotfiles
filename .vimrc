@@ -39,7 +39,6 @@ nnoremap * g*zz
 nnoremap # g#zz
 nnoremap g* *zz
 nnoremap g# #zz
-nnoremap G Gzz
 " タブ関係
 nnoremap tt :<C-u>tabnew<CR>
 nnoremap <Space> :<C-u>tabnext<CR>
@@ -121,12 +120,12 @@ set ffs=unix,dos,mac
 set ambiwidth=double
 " migemo
 set migemo
-let migemodict=$HOME.'.vim/dict/migemo-dict'
+let migemodict='~/.vim/dict/migemo-dict'
 "}}}
 
 " File {{{
 " バックアップファイルの保存先
-set backupdir=$HOME/backup
+set backupdir=~/backup
 " スワップファイルの保存先
 let &directory = &backupdir
 " Undo履歴ファイルの保存先
@@ -227,9 +226,9 @@ let sh_minlines = 500
 " Plugin Manager{{{
 " NeoBundle {{{
 if has('vim_starting')
-    set runtimepath+=$HOME/.vim/bundle/neobundle.vim
+    set runtimepath+=~/.vim/bundle/neobundle.vim
     filetype off
-    call neobundle#rc(expand('$HOME/.vim/bundle'))
+    call neobundle#rc(expand('~/.vim/bundle'))
     filetype plugin on
     filetype indent on
 endif
@@ -355,7 +354,7 @@ let g:vimfiler_safe_mode_by_default = 0
 " 日時表示はなるべく短く
 let g:vimfiler_time_format = "%y/%m/%d %H:%M"
 " データ保存場所
-let g:vimfiler_data_directory = $HOME."/.vimfiler"
+let g:vimfiler_data_directory = '~/.vimfiler'
 " 表示設定
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_tree_opened_icon = '▾'
@@ -403,14 +402,14 @@ let qfixmemo_fileencoding = 'utf-8'
 let qfixmemo_fileformat = 'unix'
 let qfixmemo_filetype = ''
 " octopressと連携
-let qfixmemo_dir = '$HOME/src/octopress/source/_posts'
-let QFixMRU_RootDir = '$HOME/src/octopress/source/_posts'
-let QFixMRU_Filename = '$HOME/.qfixmru'
+let qfixmemo_dir = '~/src/octopress/source/_posts'
+let QFixMRU_RootDir = '~/src/octopress/source/_posts'
+let QFixMRU_Filename = '~/.qfixmru'
 let qfixmemo_timeformat = 'date: %Y-%m-%d %H:%M'
 let qfixmemo_filename = '%Y-%m-%d-%H%M.mkd'
 let qfixmemo_template =
             \ ['---', 'layout: post', '%TITLE% ', '%DATE%',
-            \ 'comments: true', 'categories: ', '---']
+            \ 'comments: true', 'categories: ', '---', '']
 let qfixmemo_title = 'title:'
 let qfixmemo_timeformat_regxp = '^date: \d\{4}-\d\{2}-\d\{2} \d\{2}:\d\{2}'
 let qfixmemo_timestamp_regxp = qfixmemo_timeformat_regxp
@@ -444,10 +443,10 @@ let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '*ku*'
 " 辞書
 let g:neocomplcache_dictionary_filetype_lists = {
-            \ 'vimshell': $HOME.'/.vimshell/command-history',
-            \ 'c': $HOME.'.vim/dict/c.dict',
-            \ 'cpp': $HOME.'.vim/dict/cpp.dict',
-            \ 'vim': $HOME.'.vim/dict/vim.dict',
+            \ 'vimshell': '~/.vimshell/command-history',
+            \ 'c': '~/.vim/dict/c.dict',
+            \ 'cpp': '~/.vim/dict/cpp.dict',
+            \ 'vim': '~/.vim/dict/vim.dict',
             \ }
 " オムニ補完
 if !exists('g:neocomplcache_omni_patterns')
@@ -592,7 +591,7 @@ if !exists('g:neocomplcache_dictionary_filetype_lists')
     let g:neocomplcache_dictionary_filetype_lists = {}
 endif
 let neco_dic = g:neocomplcache_dictionary_filetype_lists
-let neco_dic.tweetvim_say = $HOME . '/.tweetvim/screen_name'
+let neco_dic.tweetvim_say = '~/.tweetvim/screen_name'
 " キーマップ
 nnoremap <silent> ft :<C-u>Unite tweetvim<CR>
 nnoremap <silent> th :<C-u>TweetVimHomeTimeline<CR>
@@ -608,7 +607,6 @@ let chalice_statusline = '%c,'
 let chalice_startupflags = 'bookmark'
 let chalice_writeoptions = 'amp,nbsp,zenkaku'
 let chalice_preview = 0
-let chalice_titlestring = "2ch"
 "}}}
 " vimplenote{{{
 NeoBundle 'mattn/vimplenote-vim'
