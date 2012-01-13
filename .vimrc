@@ -353,8 +353,6 @@ let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 " 日時表示はなるべく短く
 let g:vimfiler_time_format = "%y/%m/%d %H:%M"
-" データ保存場所
-let g:vimfiler_data_directory = '~/.vimfiler'
 " 表示設定
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_tree_opened_icon = '▾'
@@ -401,28 +399,51 @@ let mygrepprg='grep'
 let qfixmemo_fileencoding = 'utf-8'
 let qfixmemo_fileformat = 'unix'
 let qfixmemo_filetype = ''
-" octopressと連携
-let qfixmemo_dir = '~/src/octopress/source/_posts'
-let QFixMRU_RootDir = '~/src/octopress/source/_posts'
-let QFixMRU_Filename = '~/.qfixmru'
-let qfixmemo_timeformat = 'date: %Y-%m-%d %H:%M'
-let qfixmemo_filename = '%Y-%m-%d-%H%M.mkd'
-let qfixmemo_template =
-            \ ['---', 'layout: post', '%TITLE% ', '%DATE%',
-            \ 'comments: true', 'categories: ', '---', '']
-let qfixmemo_title = 'title:'
-let qfixmemo_timeformat_regxp = '^date: \d\{4}-\d\{2}-\d\{2} \d\{2}:\d\{2}'
-let qfixmemo_timestamp_regxp = qfixmemo_timeformat_regxp
-let qfixmemo_template_keycmd = "2j$a"
-let QFixMRU_Title = {}
-let QFixMRU_Title['mkd'] = '^title:'
 " 自動整形
 let qfixmemo_use_keyword = 0
 let qfixmemo_use_addtitle = 0
 let qfixmemo_use_addtime = 0
 let qfixmemo_use_updatetime = 1
 let qfixmemo_use_deletenulllines = 0
-nnoremap <Leader>b :<C-u>!rake gen_deploy<CR>
+" メインの設定
+function! QFixHowmEnvMain()
+    let g:qfixmemo_dir = '~/qfixmemo'
+    let g:QFixMRU_RootDir = '~/qfixmemo'
+    let g:QFixMRU_Filename = '~/qfixmemo/mainmru'
+    let g:qfixmemo_timeformat = '[%Y-%m-%d %H:%M]'
+    let g:qfixmemo_filename = '%Y/%m/%Y-%m-%d-%H%M%S.mkd'
+    let g:qfixmemo_template = ['%TITLE% ', ""]
+    let g:qfixmemo_title = '#'
+    let g:qfixmemo_timeformat_regxp = '^\[\d\{4}-\d\{2}\d\{2} \d\{2}:\d\{2}\]'
+    let g:qfixmemo_timestamp_regxp = g:qfixmemo_timeformat_regxp
+    let g:qfixmemo_template_keycmd = "2j$a"
+    let g:QFixMRU_Title = {}
+    let g:QFixMRU_Title['mkd'] = '^#'
+    echo g:qfixmemo_dir
+endfunction
+" ブログ作成用(octopress)の設定
+function! QFixHowmEnvBlog()
+    let g:qfixmemo_dir = '~/src/octopress/source/_posts'
+    let g:QFixMRU_RootDir = '~/src/octopress/source/_posts'
+    let g:QFixMRU_Filename = '~/qfixmemo/blogmru'
+    let g:qfixmemo_timeformat = 'date: %Y-%m-%d %H:%M'
+    let g:qfixmemo_filename = '%Y-%m-%d-%H%M.mkd'
+    let g:qfixmemo_template =
+                \ ['---', 'layout: post', '%TITLE% ', '%DATE%',
+                \ 'comments: true', 'categories: ', '---', '']
+    let g:qfixmemo_title = 'title:'
+    let g:qfixmemo_timeformat_regxp = '^date: \d\{4}-\d\{2}-\d\{2} \d\{2}:\d\{2}'
+    let g:qfixmemo_timestamp_regxp = g:qfixmemo_timeformat_regxp
+    let g:qfixmemo_template_keycmd = "2j$a"
+    let g:QFixMRU_Title = {}
+    let g:QFixMRU_Title['mkd'] = '^title:'
+    echo g:qfixmemo_dir
+endfunction
+" キーマップ
+nnoremap qm :<C-u>call QFixHowmEnvMain()<CR>
+nnoremap qb :<C-u>call QFixHowmEnvBlog()<CR>
+" GitHubにポスト
+nnoremap bp :<C-u>!cd ~/src/octopress && rake gen_deploy && cd -<CR>
 "}}}
 " lightdiff {{{
 NeoBundle 'git@github.com:wipple/lightdiff.git'
@@ -563,6 +584,9 @@ NeoBundle 'thinca/vim-quickrun'
 "}}}
 
 " Internet {{{
+" github{{{
+NeoBundle 'thinca/vim-github'
+"}}}
 " gist-vim{{{
 NeoBundle 'mattn/gist-vim'
 " 基本的に非公開
@@ -583,7 +607,7 @@ NeoBundle 'git@github.com:wipple/googlereader-vim.git'
 nnoremap <silent> <Leader>g :<C-u>GoogleReader<CR>
 "}}}
 " TweetVim{{{
-NeoBundle 'basyura/TweetVim'
+NeoBundle 'git@github.com:wipple/TweetVim.git'
 NeoBundle 'basyura/twibill.vim'
 let g:tweetvim_include_rts = 1
 " neocomplcacheと連携
