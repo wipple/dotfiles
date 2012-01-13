@@ -398,6 +398,9 @@ let mygrepprg='grep'
 " ファイルフォーマット関係
 let qfixmemo_fileencoding = 'utf-8'
 let qfixmemo_fileformat = 'unix'
+" メモファイルの拡張子
+let qfixmemo_ext = 'mkd'
+" qfixmemoのファイルタイプ指定を無効
 let qfixmemo_filetype = ''
 " 自動整形
 let qfixmemo_use_keyword = 0
@@ -411,12 +414,12 @@ function! QFixHowmEnvMain()
     let g:QFixMRU_RootDir = '~/qfixmemo'
     let g:QFixMRU_Filename = '~/qfixmemo/mainmru'
     let g:qfixmemo_timeformat = '[%Y-%m-%d %H:%M]'
-    let g:qfixmemo_filename = '%Y/%m/%Y-%m-%d-%H%M%S.mkd'
+    let g:qfixmemo_filename = '%Y/%m/%Y-%m-%d-%H%M%S'
     let g:qfixmemo_template = ['%TITLE% ', ""]
     let g:qfixmemo_title = '#'
     let g:qfixmemo_timeformat_regxp = '^\[\d\{4}-\d\{2}\d\{2} \d\{2}:\d\{2}\]'
     let g:qfixmemo_timestamp_regxp = g:qfixmemo_timeformat_regxp
-    let g:qfixmemo_template_keycmd = "2j$a"
+    let g:qfixmemo_template_keycmd = "$a"
     let g:QFixMRU_Title = {}
     let g:QFixMRU_Title['mkd'] = '^#'
     echo g:qfixmemo_dir
@@ -427,7 +430,7 @@ function! QFixHowmEnvBlog()
     let g:QFixMRU_RootDir = '~/src/octopress/source/_posts'
     let g:QFixMRU_Filename = '~/qfixmemo/blogmru'
     let g:qfixmemo_timeformat = 'date: %Y-%m-%d %H:%M'
-    let g:qfixmemo_filename = '%Y-%m-%d-%H%M.mkd'
+    let g:qfixmemo_filename = '%Y-%m-%d-%H%M'
     let g:qfixmemo_template =
                 \ ['---', 'layout: post', '%TITLE% ', '%DATE%',
                 \ 'comments: true', 'categories: ', '---', '']
